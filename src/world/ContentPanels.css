@@ -1,0 +1,126 @@
+/* Panel look is intentionally independent of the page's light/dark
+   `:root` variables (src/index.css) — the panel always sits over a
+   rendered 3D sky, never a page background, so it needs one deliberate
+   "glass over daylight" treatment rather than inheriting a scheme built
+   for flat text pages. */
+.content-panel {
+  width: 240px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(14, 17, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #f1f0eb;
+  font: 14px/145% system-ui, 'Segoe UI', Roboto, sans-serif;
+  cursor: pointer;
+  transition: transform 180ms ease, opacity 180ms ease, box-shadow 180ms ease;
+  user-select: none;
+}
+
+.content-panel:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.content-panel--focused {
+  width: 300px;
+  cursor: default;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.content-panel--dimmed {
+  opacity: 0.35;
+  transform: scale(0.92);
+  pointer-events: none;
+}
+
+.content-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.content-panel__header h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.content-panel__close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  line-height: 1;
+  padding: 2px 4px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.content-panel__close:hover {
+  opacity: 1;
+}
+
+.content-panel__body p {
+  margin: 0 0 8px;
+  color: rgba(241, 240, 235, 0.85);
+}
+
+.content-panel__body a {
+  color: #bcd8ff;
+}
+
+.content-panel__tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+.content-panel__tags li {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.content-panel__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.content-panel__list strong {
+  display: block;
+  color: #fff;
+  font-size: 13px;
+}
+
+.content-panel__list span {
+  display: block;
+  color: rgba(241, 240, 235, 0.75);
+  font-size: 12.5px;
+}
+
+.content-panel__list--inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.content-panel__cta {
+  display: inline-block;
+  margin-top: 4px;
+  font-weight: 600;
+}

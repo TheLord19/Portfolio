@@ -1,0 +1,38 @@
+/* See SceneFallback.tsx for why this uses the page's `:root` light/dark
+   variables (src/index.css) rather than the "glass over daylight" palette
+   ContentPanels.css and ControlDock.css share: nothing is rendered behind
+   this view, so there's no sky for glass to sit on. */
+.scene-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 100svh;
+  padding: 24px;
+  text-align: center;
+}
+
+.scene-fallback h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.scene-fallback p {
+  max-width: 46ch;
+  font-size: 15px;
+}
+
+.scene-fallback__cta {
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--accent-border);
+  background: var(--accent-bg);
+}
+
+.scene-fallback__cta:hover {
+  border-color: var(--accent);
+}

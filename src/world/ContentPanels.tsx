@@ -30,6 +30,16 @@ interface PanelDef {
   title: string;
 }
 
+// The panel card itself is click-to-focus/unfocus (see the `<article
+// onClick>` below), but it also holds real `<a>`s (mailto, socials, the
+// résumé CTA, project links). Without this, clicking one of those bubbles
+// up to the card and toggles focus at the same instant the link action
+// fires — e.g. clicking a project's "Code" link would also collapse the
+// panel you were just reading. Stop the click from reaching the card.
+function stopPropagation(event: { stopPropagation: () => void }) {
+  event.stopPropagation();
+}
+
 const PANEL_LAYOUT: PanelDef[] = [
   { id: 'about', position: [-5, 1.7, 1], title: 'About' },
   { id: 'projects', position: [0, 2.1, -2.5], title: 'Projects' },
@@ -58,6 +68,18 @@ function PanelBody({ id }: { id: PanelId }) {
           <li key={project.slug}>
             <strong>{project.title}</strong>
             <span>{project.summary}</span>
+            <span className="content-panel__project-links">
+              {project.links.live && (
+                <a href={project.links.live} target="_blank" rel="noreferrer" onClick={stopPropagation}>
+                  Live
+                </a>
+              )}
+              {project.links.repo && (
+                <a href={project.links.repo} target="_blank" rel="noreferrer" onClick={stopPropagation}>
+                  Code
+                </a>
+              )}
+            </span>
           </li>
         ))}
       </ul>
@@ -67,11 +89,13 @@ function PanelBody({ id }: { id: PanelId }) {
   if (id === 'contact') {
     return (
       <>
-        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        <a href={`mailto:${contact.email}`} onClick={stopPropagation}>
+          {contact.email}
+        </a>
         <ul className="content-panel__list content-panel__list--inline">
           {contact.socials.map((social) => (
             <li key={social.url}>
-              <a href={social.url} target="_blank" rel="noreferrer">
+              <a href={social.url} target="_blank" rel="noreferrer" onClick={stopPropagation}>
                 {social.label}
               </a>
             </li>
@@ -85,7 +109,7 @@ function PanelBody({ id }: { id: PanelId }) {
     return (
       <>
         <p>The one-page version, ready to skim or hand to an ATS.</p>
-        <a className="content-panel__cta" href="/resume">
+        <a className="content-panel__cta" href="/resume" onClick={stopPropagation}>
           Open résumé &rarr;
         </a>
       </>

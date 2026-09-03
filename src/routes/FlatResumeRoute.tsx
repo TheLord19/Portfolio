@@ -13,7 +13,7 @@ export default function FlatResumeRoute() {
   return (
     <main className="flat-resume">
       <header className="flat-resume__header">
-        <h1>Your Name</h1>
+        <h1>{about.name}</h1>
         <p>{about.bio}</p>
         <a className="flat-resume__cta" href="/resume.pdf">
           Download Resume (PDF)
@@ -38,10 +38,20 @@ export default function FlatResumeRoute() {
               <p>{project.summary}</p>
               <p className="flat-resume__tags">{project.stack.join(' · ')}</p>
               <div className="flat-resume__links">
-                {project.links.live && <a href={project.links.live}>Live</a>}
-                {project.links.repo && <a href={project.links.repo}>Code</a>}
+                {project.links.live && (
+                  <a href={project.links.live} target="_blank" rel="noreferrer">
+                    Live
+                  </a>
+                )}
+                {project.links.repo && (
+                  <a href={project.links.repo} target="_blank" rel="noreferrer">
+                    Code
+                  </a>
+                )}
                 {project.links.caseStudy && (
-                  <a href={project.links.caseStudy}>Case study</a>
+                  <a href={project.links.caseStudy} target="_blank" rel="noreferrer">
+                    Case study
+                  </a>
                 )}
               </div>
             </li>
@@ -55,7 +65,9 @@ export default function FlatResumeRoute() {
         <ul className="flat-resume__socials">
           {contact.socials.map((social) => (
             <li key={social.url}>
-              <a href={social.url}>{social.label}</a>
+              <a href={social.url} target="_blank" rel="noreferrer">
+                {social.label}
+              </a>
             </li>
           ))}
         </ul>

@@ -1,7 +1,10 @@
-// Shared content schema. Both the flat /resume route and the OS-layer
-// windows (once built, Phase 5) read from the same content/*.ts modules
-// via these types — this is the seam that keeps presentation (flat page,
-// retro-OS windows, and eventually a v2 VR skin) decoupled from data.
+// Shared content schema. Both the flat /resume route and the 3D scene's
+// floating panels (src/world/ContentPanels.tsx) read from the same
+// content/*.ts modules via these types — this is the seam that keeps
+// presentation (flat page, spatial panels, and eventually a v2 VR skin)
+// decoupled from data. (The OS-layer/window-manager presentation this
+// comment used to reference was dropped in the landscape/panels pivot —
+// see HANDOVER.md — but the decoupling principle still holds.)
 
 export interface Project {
   slug: string;
@@ -24,6 +27,7 @@ export interface Project {
 }
 
 export interface AboutContent {
+  name: string;
   bio: string;
   skills: string[];
   timeline: { year: number; label: string }[];
